@@ -1,2 +1,6 @@
+# Environment
 .env
+env/
+
+# Local Data
 data/users.csv
