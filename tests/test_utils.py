@@ -1,6 +1,9 @@
+import sys
+sys.path.append('../src')
+
 import unittest
 from unittest.mock import patch
-from main import get_user_id
+from src.main import get_user_id
 
 class TestBotFunctions(unittest.TestCase):
     @patch('builtins.open')
