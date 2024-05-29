@@ -22,10 +22,10 @@ async def on_ready():
 async def on_connect():
     print("Bot has connected to the server and is ready.")
 
-@tasks.loop(minutes=random.uniform(1, 30)) 
+@tasks.loop(minutes=random.uniform(1, 15)) 
 async def dm_random_message():
     user = await client.fetch_user(get_user_id('applause7')) 
-    messages = ["Message"]
+    messages = ["Fat Fuck", "12% body fat","Fatass","No abs","150lbs", "Kill yourself", "Faggot", "Lazy Ass", "Not Twink"]
     if user:
         await user.send(random.choice(messages))
 
@@ -38,3 +38,4 @@ def get_user_id(username):
     return None
 
 client.run(os.environ['BOT_TOKEN'])
+ 
