@@ -6,7 +6,7 @@ call env\Scripts\activate
 
 REM Run linter
 echo Running flake8...
-flake8 .\src > flake8_report.txt 2>&1
+flake8 .\src .\tests > flake8_report.txt 2>&1
 
 
 
