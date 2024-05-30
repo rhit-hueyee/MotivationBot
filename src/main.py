@@ -1,8 +1,6 @@
 import discord
-import random
-from discord.ext import commands, tasks
+from discord.ext import commands
 import os
-import csv
 from dotenv import load_dotenv
 
 from tasks import dm_random_message
@@ -24,7 +22,6 @@ async def on_ready():
 @client.event
 async def on_connect():
     print("Bot has connected to the server and is ready.")
-
 
 
 client.run(os.environ['BOT_TOKEN'])
