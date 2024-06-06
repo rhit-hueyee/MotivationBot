@@ -4,6 +4,7 @@ env/
 
 # Local Data
 data/users.csv
+data/messages.csv
 
 # Byte Code
 tests/__pycache__
