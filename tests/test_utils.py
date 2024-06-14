@@ -1,7 +1,7 @@
 import pytest
 from io import StringIO
 
-from src import get_random_message_by_username
+from src import get_random_message_by_username, get_user_message_by_time
 
 
 # Function to mock reading from a CSV file
@@ -54,3 +54,38 @@ def test_no_messages_in_file(mock_csv):
 def test_file_not_found():
     with pytest.raises(IOError):
         get_random_message_by_username('applause7', 'nonexistent.csv')
+
+
+def test_message_at_specific_time(mock_csv):
+    mock_data = "applause7,Test1,x\napplause7,Test2,x\napplause7,Test3s,\napplause7,Test Message,10:15\n"
+    mock_csv(mock_data)  # Apply the mock with data
+    actual_message = get_user_message_by_time("applause7", "10:15", "mocked.csv")
+    assert actual_message == "Test Message"
+
+
+def test_no_message_if_time_does_not_match(mock_csv):
+    """
+    Test that no message is returned if there is no match for the time.
+    """
+    mock_data = "applause7,Should not be found,10:14\n"
+    mock_csv(mock_data)
+    assert get_user_message_by_time("applause7", "10:15", "mocked.csv") is None
+
+
+def test_no_message_if_user_does_not_match(mock_csv):
+    """
+    Test that no message is returned if there is no match for the username.
+    """
+    mock_data = "differentUser,Message,10:15\n"
+    mock_csv(mock_data)
+    assert get_user_message_by_time("applause7", "10:15", "mocked.csv") is None
+
+
+def test_error_on_file_not_found(monkeypatch, mock_csv):
+    """
+    Test that None is returned if there is an error opening the file.
+    """
+    # Simulate file open error
+    def mock_open(file, mode='r', newline=None):
+        with pytest.raises(IOError):
+            assert get_user_message_by_time("applause7", "10:15", "non_existent.csv") is None

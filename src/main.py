@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 from dotenv import load_dotenv
 
-from tasks import dm_random_message
+from tasks import dm_random_message, send_scheduled_message
 
 load_dotenv()
 
@@ -17,6 +17,7 @@ botToken = os.getenv('BOT_TOKEN')
 async def on_ready():
     print(f'Logged in as {client.user}!')
     dm_random_message.start(client)
+    send_scheduled_message.start(client)
 
 
 @client.event
